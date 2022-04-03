@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "EasySpreadsheet"
+version = "0.1.0"
+description = ""
+authors = ["Travis Risner <deeppunster@fastmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openpyxl = "^3.0.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+blue = "^0.8.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
