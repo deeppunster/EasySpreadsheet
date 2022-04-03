@@ -2,13 +2,14 @@
 BuildSimpleSpreadsheet.py - Build a simple spreadsheet from scratch.
 """
 from pathlib import Path
+from secrets import choice
 
 from openpyxl import Workbook
 
 #######################
 # Constants
 #######################
-SPREADSHEET_NAME = 'SimpleSpreadsheet.xlsx'
+SPREADSHEET_NAME_2 = 'SimpleSpreadsheet2.xlsx'
 
 
 class ManageSpreadsheet:
@@ -42,6 +43,16 @@ class ManageSpreadsheet:
         self.spreadsheet[cell_location] = value
         return
 
+    def rename_current_spreadsheet(self, new_name: str):
+        """
+        Rename the label for the current sheet.
+
+        :param new_name:
+        :return:
+        """
+        self.spreadsheet.title = new_name
+        return
+
     def save_spreadsheet(self, filepath: Path, filename: str):
         """
         Save the spreadsheet to a specified location.
@@ -61,5 +72,15 @@ if __name__ == '__main__':
     my_work_area = Path.cwd()
     my_sheet = ManageSpreadsheet()
     my_sheet.create_spreadsheet()
+    my_sheet.rename_current_spreadsheet('Python')
     my_sheet.add_cell('A1', 'Hi from Python!')
-    my_sheet.save_spreadsheet(my_work_area, SPREADSHEET_NAME)
+
+    # add some random numbers to a column
+    column = 'c'
+    my_sheet.add_cell(column + '1', 'Random Numbers')
+    for row in range(2, 12):
+        ref = column + str(row)
+        contents = choice(range(1000))
+        my_sheet.add_cell(ref, contents)
+
+    my_sheet.save_spreadsheet(my_work_area, SPREADSHEET_NAME_2)
